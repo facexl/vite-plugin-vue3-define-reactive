@@ -26,7 +26,7 @@ export default function defineReactiveVitePlugin(userOptions:userOptions):Plugin
   }
   return {
     name: DEFINE_REACTIVE,
-    transform(src, id) {
+    transform(src, id):any {
       if (fileRegex.test(id)) {
         return {
           code: compileFileToJS(src,options),
@@ -41,7 +41,7 @@ export default function defineReactiveVitePlugin(userOptions:userOptions):Plugin
 //     debug:true
 // })
 
-function compileFileToJS(src:string,options:userOptions):string{
+function compileFileToJS(src:string,options:userOptions):string | void{
 
     if(!src.includes(DEFINE_REACTIVE))return
 
@@ -82,7 +82,7 @@ function compileFileToJS(src:string,options:userOptions):string{
 
     const resTargets = targets.map(target=>{
         const needIdentifier = target.type==='ExpressionStatement'
-        let targetArguments = [];
+        let targetArguments:Array<{type:string,properties:Array<any>}> = [];
         if(needIdentifier){
             targetArguments = target.expression.arguments
         }else{
