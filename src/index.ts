@@ -2,7 +2,6 @@
 
 import { parse,babelParse } from 'vue/compiler-sfc'
 import type { Plugin } from 'vite'
-// import { str } from './testStr'
 
 const fileRegex = /\.vue$/
 
@@ -29,19 +28,15 @@ export default function defineReactiveVitePlugin(userOptions:userOptions):Plugin
     transform(src, id):any {
       if (fileRegex.test(id)) {
         return {
-          code: compileFileToJS(src,options),
+          code: transformDefineReactiveMacro(src,options),
         }
       }
     }
   }
 }
 
-// compileFileToJS(str,{
-//     needImport:true,
-//     debug:true
-// })
 
-function compileFileToJS(src:string,options:userOptions):string | void{
+export const transformDefineReactiveMacro = function(src:string,options:userOptions):string | void{
 
     if(!src.includes(DEFINE_REACTIVE))return
 
@@ -182,6 +177,7 @@ function compileFileToJS(src:string,options:userOptions):string | void{
                     .filter(it=>descriptor[it])
                     .map(it=>revertTopTags(descriptor[it],it==='scriptSetup'?finallyScript:''))
                     .concat(descriptor['styles'].map(it=>revertTopTags(it)))
+                    .concat(descriptor['customBlocks'].map(it=>revertTopTags(it)))
                     .sort((a,b)=>(+a.offset) - (+b.offset))
                     .map(it=>it.content)
                     .join('\n')
