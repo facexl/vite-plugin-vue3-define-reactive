@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-vue3-define-reactive",
-  "version": "0.1",
+  "version": "0.0.2",
   "description": "macro for vue3 sfc",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -11,6 +11,11 @@
   "scripts": {
     "test": "jest",
     "build":"tsup src/index.ts src/defineReactive.d.ts --format esm,cjs --dts"
+  },
+  "homepage": "https://github.com/facexl/vite-plugin-vue3-define-reactive",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:facexl/vite-plugin-vue3-define-reactive.git"
   },
   "author": "facexl@foxmail.com",
   "license": "MIT",
