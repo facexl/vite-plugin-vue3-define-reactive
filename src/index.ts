@@ -61,7 +61,7 @@ export const transformDefineReactiveMacro = function(src:string,options:userOpti
         sourceType: 'module'
     }).program
 
-    log('babelParse 转换的 ast',scriptAst)
+    log('after babelParse ast',scriptAst)
 
     const nodeBody = scriptAst.body as any
 
@@ -215,3 +215,4 @@ function revertTopTags(
         offset:obj.loc.start.offset
     }
 }
+
