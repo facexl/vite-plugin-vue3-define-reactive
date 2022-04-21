@@ -60,18 +60,4 @@ describe('transformDefineReactiveMacro', () => {
         })
         expect(content).toMatch(`const {a} = toRefs(state)`)
     })
-    test('example',()=>{
-        const content = transformDefineReactiveMacro(`<template>
-        <div>{{a}}</div>
-    </template>
-    <script setup>
-    defineReactive({
-        a:1,
-        b:2
-    })
-    </script> `,{
-            needImport:true
-        })
-        console.log(content)
-    })
 })
