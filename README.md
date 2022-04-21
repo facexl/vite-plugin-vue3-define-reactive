@@ -1,6 +1,78 @@
 # vite-plugin-vue3-define-reactive
 a special compiler macros `defineReactive` for `vue3 script-setup`
 
+
+## without 
+
+```javascript
+<template>
+    <div>{{a}}</div>
+    <div>{{b}}</div>
+    <div>{{c}}</div>
+</template>
+<script setup>
+import { ref } from 'vue';
+const a = ref(0);
+const b = ref(1);
+const c = ref(2)
+
+c.value = 3
+
+</script>  
+
+```
+
+## with  
+
+```javascript
+<template>
+    <div>{{a}}</div>
+    <div>{{b}}</div>
+    <div>{{c}}</div>
+</template>
+<script setup>
+const state = defineReactive({
+    a:0,
+    b:1,
+    c:2
+})
+
+state.c = 3 // no .value
+
+</script> 
+
+```  
+
+## without 
+
+```javascript
+<template>
+    <div>{{a}}</div>
+</template>
+<script setup>
+import { ref } from 'vue'
+const a = ref(1)
+const b = ref(2)
+</script>
+
+```
+
+## with 
+
+```javascript
+<template>
+    <div>{{a}}</div>
+</template>
+<script setup>
+import { ref } from 'vue'
+defineReactive({
+    a:1,
+    b:2
+})
+</script>
+
+```
+
 ## Usage
 
 ```shell
@@ -25,46 +97,8 @@ export default defineConfig({
 })
 
 ```
-### without 
 
-```javascript
-<template>
-    <div>{{a}}</div>
-    <div>{{b}}</div>
-    <div>{{c}}</div>
-</template>
-<script setup>
-import { ref } from 'vue';
-const a = ref(0);
-const b = ref(1);
-const c = ref(2)
-
-c.value = 3
-
-</script>  
-
-```
-
-### with  
-
-```javascript
-<template>
-    <div>{{a}}</div>
-    <div>{{b}}</div>
-    <div>{{c}}</div>
-</template>
-<script setup>
-const state = defineReactive({
-    a:0,
-    b:1,
-    c:2
-})
-
-state.c = 3 // no .value
-
-</script> 
-
-```  
+## Readme
 
 if before `script-setup version` you write vue3 code like this:
 
@@ -98,7 +132,7 @@ this is helpful for refactor you project to `script-setup`:
 </script>
 ```
 
-In fact,your code will transform before vue complie.
+In fact, your code will transform before vue complie.
 
 transform like this:
 
