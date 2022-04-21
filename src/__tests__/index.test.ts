@@ -54,7 +54,7 @@ describe('transformDefineReactiveMacro', () => {
         class d {}
         defineReactive({
             r:1
-        }) as fuck
+        }) as any
     </script>
         `,{
         })
