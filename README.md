@@ -98,7 +98,7 @@ this is helpful for refactor you project to `script-setup`:
 </script>
 ```
 
-Infact,your code will transform before vue complie.
+In fact,your code will transform before vue complie.
 
 transform like this:
 
