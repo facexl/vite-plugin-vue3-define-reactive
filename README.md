@@ -134,10 +134,12 @@ In your `vite.config.js`:
 
 ```javascript
 import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 import defineReactive from 'vite-plugin-vue3-define-reactive'
 export default defineConfig({
   plugins: [
       defineReactive(),
+      vue()
   ],
 })
 
