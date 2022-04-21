@@ -23,7 +23,7 @@ c.value = 3
 ```
 
 ## with  
-
+示例1：
 ```javascript
 <template>
     <div>{{a}}</div>
@@ -58,19 +58,64 @@ const b = ref(2)
 ```
 
 ## with 
-
+示例2：
 ```javascript
 <template>
     <div>{{a}}</div>
 </template>
 <script setup>
-import { ref } from 'vue'
 defineReactive({
     a:1,
     b:2
 })
 </script>
 
+```
+
+#### In fact, your code will transform before vue complie:
+
+### 示例1：
+
+```javascript
+    <template>
+        <div>{{a}}</div>
+        <div>{{b}}</div>
+        <div>{{c}}</div>
+    </template>
+      <script setup>
+       import { toRefs,reactive } from 'vue' 
+       
+              const state = reactive({
+                  a:0,
+                  b:1,
+                  c:2
+              })
+              
+              state.c = 3 // no .value
+              
+              
+       const {a,b,c} = toRefs(state)
+      </script>
+
+```
+
+### 示例2：
+
+```javascript
+      <template>
+              <div>{{a}}</div>
+          </template>
+      <script setup>
+       import { toRefs,reactive } from 'vue' 
+       
+          
+       const auto_identifier__v_5=reactive({
+              a:1,
+              b:2
+          })
+          
+       const {a,b} = toRefs(auto_identifier__v_5)
+      </script>
 ```
 
 ## Usage
@@ -98,7 +143,21 @@ export default defineConfig({
 
 ```
 
-## Readme
+### type 
+
+Create a new file in your src folder and write this for type hints.
+
+```javascript
+declare global {
+    const defineReactive:<T extends {
+        [key:string]:any
+    }>(obj:T)=>T
+}
+export {}
+
+```
+
+### by the way  
 
 if before `script-setup version` you write vue3 code like this:
 
@@ -112,8 +171,10 @@ setup(){
         c:3
     })
     state.c = 7
+    const handleClick = ()=>{}
     return {
-        ...toRefs(state)
+        ...toRefs(state),
+        handleClick
     }
 }
 </script>
@@ -129,39 +190,7 @@ this is helpful for refactor you project to `script-setup`:
         c:3
     })
     state.c = 7
+    const handleClick = ()=>{}
 </script>
 ```
 
-In fact, your code will transform before vue complie.
-
-transform like this:
-
-```javascript
-<script setup>
-import { reactive,toRefs } from 'vue'
-const state = reactive({
-    a:1,
-    b:2,
-    c:3
-})
-
-state.c = 7
-
-const { a,b,c } = toRefs(state)
-</script>
-
-```
-
-### type 
-
-Create a new file in your src folder and write this for type hints.
-
-```javascript
-declare global {
-    const defineReactive:<T extends {
-        [key:string]:any
-    }>(obj:T)=>T
-}
-export {}
-
-```
