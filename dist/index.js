@@ -183,6 +183,7 @@ var transformDefineReactiveMacro = function(src, options) {
     log("ast hit nothing");
     return;
   }
+  log("targets", targets);
   const resTargets = targets.map((target) => {
     const needIdentifier = target.type === "ExpressionStatement";
     const newIdentifier = `${default_var_name}${target.source.start}`;
@@ -192,7 +193,7 @@ var transformDefineReactiveMacro = function(src, options) {
       source: target.source,
       args: target.args,
       finallyStr: `
- const ${JSON.stringify(target.args).replace(/\[/, "{").replace(/\]/, "}").replace(/\"/g, "")} = toRefs(${needIdentifier ? newIdentifier : target.id})
+ const {${target.args.join(",")}} = toRefs(${needIdentifier ? newIdentifier : target.id})
 `
     };
   });
