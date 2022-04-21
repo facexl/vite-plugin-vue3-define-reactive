@@ -79,6 +79,8 @@ export const transformDefineReactiveMacro = function(src:string,options:userOpti
         return
     }
 
+    log('targets',targets)
+
     const resTargets = targets.map(target=>{
         const needIdentifier = target.type==='ExpressionStatement'
         const newIdentifier = `${default_var_name}${target.source.start}`
@@ -87,7 +89,7 @@ export const transformDefineReactiveMacro = function(src:string,options:userOpti
             newIdentifier,
             source:target.source,
             args:target.args,
-            finallyStr:`\n const ${JSON.stringify(target.args).replace(/\[/,'{').replace(/\]/,'}').replace(/\"/g,'')} = toRefs(${needIdentifier?newIdentifier:target.id})\n`
+            finallyStr:`\n const {${target.args.join(',')}} = toRefs(${needIdentifier?newIdentifier:target.id})\n`
         }
     }) as any
 
