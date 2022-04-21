@@ -1,5 +1,5 @@
 # vite-plugin-vue3-define-reactive
-a special compiler macros `defineReactive`
+a special compiler macros `defineReactive` for `vue3 script-setup`
 
 ## Usage
 
