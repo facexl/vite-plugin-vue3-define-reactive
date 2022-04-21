@@ -39,4 +39,25 @@ describe('transformDefineReactiveMacro', () => {
         `,{})
         expect(content).toMatch(`auto_identifier__v_15`)
     })
+    test('ts', () => {
+        const content = transformDefineReactiveMacro(`
+        <script setup lang="ts">
+        const state = defineReactive({
+            a:2 as number
+        } as any) as any
+        let x,y,z;
+        const r = function(){}
+        const r2 = (function(){})()
+        let a  = 1
+        const b = 2
+        function c() {}
+        class d {}
+        defineReactive({
+            r:1
+        }) as fuck
+    </script>
+        `,{
+        })
+        expect(content).toMatch(`const {a} = toRefs(state)`)
+    })
 })

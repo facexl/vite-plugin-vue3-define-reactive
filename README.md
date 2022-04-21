@@ -117,3 +117,17 @@ const { a,b,c } = toRefs(state)
 </script>
 
 ```
+
+### type 
+
+Create a new file in your src folder and write this for type hints.
+
+```javascript
+declare global {
+    const defineReactive:<T extends {
+        [key:string]:any
+    }>(obj:T)=>T
+}
+export {}
+
+```
