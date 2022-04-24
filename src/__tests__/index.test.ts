@@ -13,6 +13,7 @@ describe('transformDefineReactiveMacro', () => {
             needImport:true
         })
       expect(content).toMatch('const {showApp,loading} = toRefs(state)')
+      expect(content).toMatchSnapshot()
     })
     test('should import missing dependencies', () => {
         const content = transformDefineReactiveMacro(`
@@ -27,6 +28,7 @@ describe('transformDefineReactiveMacro', () => {
               needImport:true
           })
         expect(content).toMatch(`import { reactive } from 'vue'`)
+        expect(content).toMatchSnapshot()
     })
     test('should auto declare new variable', () => {
         const content = transformDefineReactiveMacro(`
@@ -38,6 +40,7 @@ describe('transformDefineReactiveMacro', () => {
           </script>
         `,{})
         expect(content).toMatch(`auto_identifier__v_15`)
+        expect(content).toMatchSnapshot()
     })
     test('ts', () => {
         const content = transformDefineReactiveMacro(`
@@ -59,5 +62,6 @@ describe('transformDefineReactiveMacro', () => {
         `,{
         })
         expect(content).toMatch(`const {a} = toRefs(state)`)
+        expect(content).toMatchSnapshot()
     })
 })

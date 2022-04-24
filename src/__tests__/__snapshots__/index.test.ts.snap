@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transformDefineReactiveMacro should auto declare new variable 1`] = `
+"<script setup>
+              
+ const auto_identifier__v_15=reactive({
+                  showApp:false,
+                  loading:false
+              })
+          
+ const {showApp,loading} = toRefs(auto_identifier__v_15)
+</script>"
+`;
+
+exports[`transformDefineReactiveMacro should expose all params key top level declarations 1`] = `
+"<script setup>
+ import { toRefs,reactive } from 'vue' 
+ 
+            const state = reactive({
+                showApp:false,
+                loading:false
+            })
+        
+ const {showApp,loading} = toRefs(state)
+</script>"
+`;
+
+exports[`transformDefineReactiveMacro should import missing dependencies 1`] = `
+"<script setup>
+ import { reactive } from 'vue' 
+ 
+              import { toRefs } from 'vue'
+              
+ const auto_identifier__v_58=reactive({
+                  showApp:false,
+                  loading:false
+              })
+          
+ const {showApp,loading} = toRefs(auto_identifier__v_58)
+</script>"
+`;
+
+exports[`transformDefineReactiveMacro ts 1`] = `
+"<script setup lang=\\"ts\\">
+        const state = reactive({
+            a:2 as number
+        } as any) as any
+        let x,y,z;
+        const r = function(){}
+        const r2 = (function(){})()
+        let a  = 1
+        const b = 2
+        function c() {}
+        class d {}
+        
+ const auto_identifier__v_267=reactive({
+            r:1
+        }) as any
+    
+ const {r} = toRefs(auto_identifier__v_267)
+
+ const {a} = toRefs(state)
+</script>"
+`;
