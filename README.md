@@ -23,7 +23,7 @@ c.value = 3
 ```
 
 ## with  
-示例1：
+example 1：
 ```javascript
 <template>
     <div>{{a}}</div>
@@ -58,7 +58,7 @@ const b = ref(2)
 ```
 
 ## with 
-示例2：
+example 2：
 ```javascript
 <template>
     <div>{{a}}</div>
@@ -74,7 +74,7 @@ defineReactive({
 
 #### In fact, your code will transform before vue complie:
 
-### 示例1：
+### example 1：
 
 ```javascript
     <template>
@@ -99,7 +99,7 @@ defineReactive({
 
 ```
 
-### 示例2：
+### example 2：
 
 ```javascript
       <template>
